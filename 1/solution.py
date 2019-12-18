@@ -1,13 +1,14 @@
-from typing import List
+from typing import List, NoReturn
 
 class Solution():
-    def one(self, usr_input: List[int]) -> int:
-       converted_usr_input = self.str_to_int(usr_input)
-       return sum([self.get_fuel_requirements(n) for n in converted_usr_input])
+    def __init__(self, usr_input: List[int]) -> NoReturn:
+       self.converted_usr_input = self.str_to_int(usr_input)
+    
+    def one(self) -> int:
+       return sum([self.get_fuel_requirements(n) for n in self.converted_usr_input])
 
-    def two(self, usr_input: List[int]) -> int:
-       converted_usr_input = self.str_to_int(usr_input)
-       return sum([self.get_total_fuel_requirements(n) for n in converted_usr_input])
+    def two(self) -> int:
+       return sum([self.get_total_fuel_requirements(n) for n in self.converted_usr_input])
        
     def get_total_fuel_requirements(self, added_object: int) -> int:
        fuel_requirements = self.get_fuel_requirements(added_object)

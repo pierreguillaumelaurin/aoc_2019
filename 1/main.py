@@ -9,6 +9,6 @@ if __name__ == "__main__":
         else:
              break
 
-    solution = Solution()
-    print(solution.one(lines))
-    print(solution.two(lines))
+    solution = Solution(lines)
+    print(solution.one())
+    print(solution.two())
