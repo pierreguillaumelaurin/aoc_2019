@@ -10,17 +10,21 @@ class Computer():
         self.fix()
         self.run()
         return self.intcode
-            
+
     def run(self) -> NoReturn:
         current_operation = self.intcode[self.current_op_position]
         while self.execute(current_operation) != 'exit':
-            first_input_position = self.current_op_position + 1
-            second_input_position = self.current_op_position + 2
-            output_position = self.current_op_position + 3
-            input_cells = [self.intcode[self.intcode[first_input_position]], self.intcode[self.intcode[second_input_position]]]
-            self.intcode[self.intcode[output_position]] = self.execute(current_operation)(input_cells)
+            first_input_position = self.intcode_to_position(self.current_op_position + 1)
+            second_input_position = self.intcode_to_position(self.current_op_position + 2)
+            output_position = self.intcode_to_position(self.current_op_position + 3)
+            input_cells = [self.intcode[first_input_position], self.intcode[second_input_position]]
+
+            self.intcode[output_position] = self.execute(current_operation)(input_cells)
             self.current_op_position += 4
             current_operation = self.intcode[self.current_op_position]
+
+    def intcode_to_position(self, intcode_cell: int) -> int:
+        return self.intcode[intcode_cell]
 
     def execute(self, op_position: int) -> Any:
         return self.opcode[op_position]

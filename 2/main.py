@@ -5,3 +5,4 @@ if __name__ == "__main__":
     computer = Computer(lines)
     print(computer.first_solution())
 
+
