@@ -7,7 +7,7 @@ class Computer():
         self.current_op_position = 0
 
     def first_solution(self) -> int:
-        #self.fix()
+        self.fix()
         self.run()
         return self.intcode
             
