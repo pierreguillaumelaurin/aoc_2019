@@ -1,4 +1,4 @@
-from typing import Any, NoReturn
+from typing import Any, List, NoReturn
 
 class Computer():
     def __init__(self, startup_computer_intcode: str) -> NoReturn:
@@ -7,9 +7,9 @@ class Computer():
         self.current_op_position = 0
 
     def first_solution(self) -> int:
-        self.fix()
+        #self.fix()
         self.run()
-        return getattr(self, self.intcode)[0]
+        return self.intcode
             
     def run(self) -> NoReturn:
         current_operation = self.intcode[self.current_op_position]
@@ -17,9 +17,11 @@ class Computer():
             first_input_position = self.current_op_position + 1
             second_input_position = self.current_op_position + 2
             output_position = self.current_op_position + 3
-            self.intcode[output_position] = self.execute(current_operation)(self.intcode[first_input_position], self.intcode[second_input_position])
+            input_cells = [self.intcode[self.intcode[first_input_position]], self.intcode[self.intcode[second_input_position]]]
+            self.intcode[self.intcode[output_position]] = self.execute(current_operation)(input_cells)
             self.current_op_position += 4
-    
+            current_operation = self.intcode[self.current_op_position]
+
     def execute(self, op_position: int) -> Any:
         return self.opcode[op_position]
 
@@ -28,5 +30,8 @@ class Computer():
         self.intcode[2] = 2
         
     @staticmethod
-    def prod(first: int, second: int) -> int:
-        return first * second
+    def prod(it: List) -> int:
+        res = 1
+        for n in it:
+            res *= n
+        return res
