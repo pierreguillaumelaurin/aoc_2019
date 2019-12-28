@@ -11,5 +11,5 @@ class Solution():
     def second_solution(self) -> int:
         for n in range(0, 100):
             for m in range(0, 100):
-                if self.elve_computer.set_run_and_reset(n, m) == 2:
+                if self.elve_computer.set_run_and_reset(n, m) == 19690720:
                     return 100 * n + m
