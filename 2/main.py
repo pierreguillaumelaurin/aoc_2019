@@ -1,8 +1,9 @@
-from solution import Computer
+from solution import Solution
 
 if __name__ == "__main__":
     lines = input()
-    computer = Computer(lines)
-    print(computer.first_solution())
+    solution = Solution(lines)
+    print(solution.first_solution())
+    print(solution.second_solution())
 
 
