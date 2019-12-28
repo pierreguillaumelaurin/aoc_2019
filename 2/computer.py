@@ -3,9 +3,17 @@ from typing import Any, List, NoReturn
 class Computer():
     def __init__(self, startup_computer_intcode: str) -> NoReturn:
         self.opcode = {1: sum, 2: self.prod, 99: 'exit'}
-        self._startup_computer_intcode = [int(n) for n in startup_computer_intcode.split(',')] 
-        self.intcode = self._startup_computer_intcode
+        self.intcode = [int(n) for n in startup_computer_intcode.split(',')] 
         self.current_op_position = 0
+        self.program_alarm_state = self.get_program_alarm_state()
+        self.reset_memory()
+
+    def get_program_alarm_state(self) -> List:
+        self.intcode[1] = 12
+        self.intcode[2] = 2 
+        self.run()
+        return self.intcode
+
 
     def set_run_and_reset(self, noun: int, verb: int) -> int:
         self.set_inputs(noun, verb)
@@ -38,7 +46,7 @@ class Computer():
         self.intcode[2] = verb 
 
     def reset_memory(self) -> NoReturn:
-        self.intcode = self._startup_computer_intcode    
+        self.intcode = self.program_alarm_state
 
     @staticmethod
     def prod(it: List) -> int:
