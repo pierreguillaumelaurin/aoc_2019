@@ -5,9 +5,8 @@ class Computer():
         self.opcode = {1: sum, 2: self.prod, 99: 'exit'}
         self.intcode = [int(n) for n in startup_computer_intcode.split(',')] 
         self.current_op_position = 0
-        self.program_alarm_state = self.get_program_alarm_state()
+        self.program_alarm_state = self.intcode.copy()
         self.reset_memory()
-        print(self.intcode)
 
     def get_program_alarm_state(self) -> List:
         self.intcode[1] = 12
@@ -32,7 +31,8 @@ class Computer():
             self.intcode[output_position] = self.execute(current_operation)(input_cells)
             self.current_op_position += 4
             current_operation = self.intcode[self.current_op_position]
-        return self.intcode[0]    
+        self.reset_current_op_position()
+        return self.intcode[0]
 
     def intcode_to_position(self, intcode_cell: int) -> int:
         return self.intcode[intcode_cell]
@@ -45,7 +45,10 @@ class Computer():
         self.intcode[2] = verb 
 
     def reset_memory(self) -> NoReturn:
-        self.intcode = self.program_alarm_state
+        self.intcode = self.program_alarm_state.copy()
+
+    def reset_current_op_position(self) -> NoReturn:
+        self.current_op_position = 0    
 
     @staticmethod
     def prod(it: List) -> int:
