@@ -7,6 +7,7 @@ class Computer():
         self.current_op_position = 0
         self.program_alarm_state = self.get_program_alarm_state()
         self.reset_memory()
+        print(self.intcode)
 
     def get_program_alarm_state(self) -> List:
         self.intcode[1] = 12
@@ -14,13 +15,11 @@ class Computer():
         self.run()
         return self.intcode
 
-
     def set_run_and_reset(self, noun: int, verb: int) -> int:
         self.set_inputs(noun, verb)
         output = self.run()
         self.reset_memory()
         return output
-
 
     def run(self) -> int:
         current_operation = self.intcode[self.current_op_position]
