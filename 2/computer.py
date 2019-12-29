@@ -5,14 +5,8 @@ class Computer():
         self.opcode = {1: sum, 2: self.prod, 99: 'exit'}
         self.intcode = [int(n) for n in startup_computer_intcode.split(',')] 
         self.current_op_position = 0
-        self.program_alarm_state = self.intcode.copy()
+        self.initial_state = self.intcode.copy()
         self.reset_memory()
-
-    def get_program_alarm_state(self) -> List:
-        self.intcode[1] = 12
-        self.intcode[2] = 2 
-        self.run()
-        return self.intcode
 
     def set_run_and_reset(self, noun: int, verb: int) -> int:
         self.set_inputs(noun, verb)
@@ -45,7 +39,7 @@ class Computer():
         self.intcode[2] = verb 
 
     def reset_memory(self) -> NoReturn:
-        self.intcode = self.program_alarm_state.copy()
+        self.intcode = self.initial_state.copy()
 
     def reset_current_op_position(self) -> NoReturn:
         self.current_op_position = 0    
