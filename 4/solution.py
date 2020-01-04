@@ -1,5 +1,6 @@
 # six digit number
 # value within range given in puzzle
+import collections
 import operator
 
 class Solution():
@@ -8,9 +9,17 @@ class Solution():
         self.upper_limit = int(password_range[7:])
         self.password = [str(n) for n in range(self.lower_limit, self.upper_limit)]
 
-    def one(self):
+    def one(self) -> int:
         # going from left to right, the digits never decrease
         self.password = [n for n in self.password if n == "".join(sorted(n))]    
         # two adjacent digits are the same
         self.password = [n for n in self.password if any(map(operator.eq, n, n[1:]))]
         return len(self.password)
+
+    def two(self) -> int:
+        counter = 0
+        for n in self.password:
+            counts = collections.Counter(n)
+            if 2 in counts.values():
+                counter += 1
+        return counter
