@@ -5,10 +5,10 @@ class Solution():
        self.converted_usr_input = self.str_to_int(usr_input)
     
     def one(self) -> int:
-       return sum([self.get_fuel_requirements(n) for n in self.converted_usr_input])
+       return sum((self.get_fuel_requirements(n) for n in self.converted_usr_input))
 
     def two(self) -> int:
-       return sum([self.get_total_fuel_requirements(n) for n in self.converted_usr_input])
+       return sum((self.get_total_fuel_requirements(n) for n in self.converted_usr_input))
        
     def get_total_fuel_requirements(self, added_object: int) -> int:
        fuel_requirements = self.get_fuel_requirements(added_object)
