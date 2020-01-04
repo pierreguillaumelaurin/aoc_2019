@@ -17,9 +17,4 @@ class Solution():
         return len(self.password)
 
     def two(self) -> int:
-        counter = 0
-        for n in self.password:
-            counts = collections.Counter(n)
-            if 2 in counts.values():
-                counter += 1
-        return counter
+        return sum((1 for n in self.password if 2 in collections.Counter(n).values()))
