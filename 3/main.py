@@ -6,3 +6,4 @@ if __name__ == "__main__":
 
     solution = Solution(lines[0], lines[1])
     print(solution.one())
+    print(solution.two())

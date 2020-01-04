@@ -48,7 +48,11 @@ class Solution():
 
     def one(self) -> int:
         common_positions = self.get_common_positions()
-        return min([self.get_manhattan_distance_from_central_port(pos) for pos in common_positions])
+        return min((self.get_manhattan_distance_from_central_port(pos) for pos in common_positions))
+
+    def two(self) -> int:
+        common_positions = self.get_common_positions()
+        return min((sum((self.first_wire_positions.index(pos), self.second_wire_positions.index(pos))) for pos in common_positions))    
 
     def get_common_positions(self) -> List:
         first_wire_positions_without_tail = self.first_wire_positions[1:]
